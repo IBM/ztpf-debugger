@@ -10,7 +10,7 @@ Welcome to the official documentation for the **z/TPF VS Code Debugger Extension
 
 ## To visit the z/TPF VS Code Debugger Extension page, go here: 
 
-[Debugger site](https://IBM.github.io/ztpf-debugger){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Debugger site](https://IBM.github.io/ztpf-development){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 # Basic website structure made with IBM BOB <img src="ibmbob.jpeg" alt="Little Bob Man" width="30" height="15">
 
