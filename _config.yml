@@ -23,7 +23,7 @@ search:
 footer_content: "Copyright &copy; 2026. Distributed under the <a href=\"https://github.com/JoshuaRichey/justthedocstemp/blob/main/LICENSE\">MIT License</a>."
 
 # Color scheme
-color_scheme: dark
+color_scheme: light
 
 # External links
 aux_links:
