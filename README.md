@@ -7,7 +7,7 @@ IBM z/TPF Debugger is an extension for Visual Studio Code that allows you to deb
 Any [issues](https://github.com/IBM/ztpf-debugger/issues) reported directly on this repository will be handled on a best-effort basis by the development team. Priority will be given to issues reported via opening a case through the [IBM Support](https://www.ibm.com/mysupport/s/createrecord/NewCase) channel.
 
 # License
-- The license for IBM z/TPF Development can be found in the [LICENSE file](https://github.com/IBM/ztpf-debugger/blob/main/product/LICENSE) in the product folder in this repository.
+- The license for IBM z/TPF Debugger can be found in the [LICENSE file](https://github.com/IBM/ztpf-debugger/blob/main/product/LICENSE) in the product folder in this repository.
 - All other files managed in this repository are intended for the purpose of presenting the [product documentation web site](https://IBM.github.io/ztpf-debugger). The license for these files can be found in the [LICENSE file](https://github.com/IBM/ztpf-debugger/blob/main/LICENSE) in the root folder of this repository.
 
 ## Core Capabilities
