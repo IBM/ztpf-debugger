@@ -28,5 +28,6 @@ color_scheme: light
 # External links
 aux_links:
   "View on GitHub": "https://github.com/IBM/ztpf-debugger"
+  "VS Code Marketplace": "https://marketplace.visualstudio.com/items?itemName=IBM.ztpf-debugger"
 
 aux_links_new_tab: true

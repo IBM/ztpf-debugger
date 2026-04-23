@@ -1,174 +1,113 @@
-# just-the-docs-template
+# IBM z/TPF Debugger
 
-This is a *bare-minimum* template to create a [Jekyll] site that:
+IBM z/TPF Debugger is an extension for Visual Studio Code that allows you to debug z/TPF programs that run on IBM z/TPF.
 
-- uses the [Just the Docs] theme;
-- can be built and published on [GitHub Pages];
-- can be built and previewed locally, and published on other platforms.
+# Issues
 
-More specifically, the created site:
+Any [issues](https://github.com/IBM/ztpf-debugger/issues) reported directly on this repository will be handled on a best-effort basis by the development team. Priority will be given to issues reported via opening a case through the [IBM Support](https://www.ibm.com/mysupport/s/createrecord/NewCase) channel.
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem;
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages.
+# License
+- The license for IBM z/TPF Development can be found in the [LICENSE file](https://github.com/IBM/ztpf-debugger/blob/main/product/LICENSE) in the product folder in this repository.
+- All other files managed in this repository are intended for the purpose of presenting the [product documentation web site](https://IBM.github.io/ztpf-debugger). The license for these files can be found in the [LICENSE file](https://github.com/IBM/ztpf-debugger/blob/main/LICENSE) in the root folder of this repository.
 
-To get started with creating a site, simply:
+## Core Capabilities
 
-1. click "[use this template]" to create a GitHub repository
-2. go to Settings > Pages > Build and deployment > Source, and select GitHub Actions
+### 1. Remote Debug Registration
 
-If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](#hosting-your-docs-from-an-existing-project-repo).
+The extension enables registration of debug hooks on the z/TPF runtime system:
 
-After completing the creation of your new site on GitHub, update it as needed:
+- **Program Registration**: Register debug hooks for specific z/TPF programs by name
+- **Session Management**: Create, manage, and terminate debug registration sessions
+- **Real-time Notifications**: Receive status updates when registration succeeds or fails
+- **Automatic GDB Launch**: Automatically starts GDB debug sessions when hooks are triggered
 
-## Replace the content of the template pages
+### 2. Secure Communication
 
-Update the following files to your own content:
+Robust network communication with the remote debug service:
 
-- `index.md` (your new home page)
-- `README.md` (information for those who access your site repo on GitHub)
+- **TLS/SSL Support**: Secure connections enabled by default using Transport Layer Security
+- **Certificate Management**: Support for custom server certificates appended to trusted CA list
+- **Non-secure Mode**: Optional fallback to non-encrypted connections when needed
+- **Connection Validation**: Comprehensive validation of connection parameters before establishing sessions
 
-## Changing the version of the theme and/or Jekyll
+### 3. Debug Configuration
 
-Simply edit the relevant line(s) in the `Gemfile`.
+Flexible configuration system integrated with VS Code's launch.json:
 
-## Adding a plugin
+- **Schema Validation**: Built-in JSON schema validation for debug configurations
+- **Configuration Snippets**: Pre-built templates for common debugging scenarios
+- **IntelliSense Support**: Auto-completion and documentation for all configuration properties
+- **Multiple Registration Types**: Support for program, function, macro, and error-based registration (program type currently implemented)
 
-The Just the Docs theme automatically includes the [`jekyll-seo-tag`] plugin.
+### 4. GDB Integration
 
-To add an extra plugin, you need to add it in the `Gemfile` *and* in `_config.yml`. For example, to add [`jekyll-default-layout`]:
+Seamless integration with the GNU Debugger (GDB):
 
-- Add the following to your site's `Gemfile`:
+- **SSH Pipe Transport**: Connects to remote GDB instances via SSH tunneling
+- **Automatic Configuration Generation**: Dynamically creates GDB launch configurations
+- **Source File Mapping**: Maps remote source paths to local workspace paths
+- **Shared Object Search Paths**: Configurable paths for locating required shared libraries
+- **TPFGDB Support**: Integration with z/TPF-specific GDB extensions
 
-  ```ruby
-  gem "jekyll-default-layout"
-  ```
+---
 
-- And add the following to your site's `_config.yml`:
+## Configuration Options
 
-  ```yaml
-  plugins:
-    - jekyll-default-layout
-  ```
+### Required Extension Settings
 
-Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
+Users must configure these settings for the extension to function:
 
-## Publishing your site on GitHub Pages
+| Setting | Description |
+|---------|-------------|
+| `ztpf-debugger.pipe.program` | Absolute path to SSH executable on local workstation |
+| `ztpf-debugger.pipe.user` | Username for SSH authentication to Linux on IBM Z system |
+| `ztpf-debugger.pipe.host` | IP address or hostname of Linux on IBM Z system |
+| `ztpf-debugger.tpfgdb.path` | Absolute remote path to TPFGDB executable on Linux on IBM Z system |
+| `ztpf-debugger.tpfgdb.pythonPath` | Absolute remote path to TPFGDB Python script on Linux on IBM Z system |
 
-1.  If your created site is `YOUR-USERNAME/YOUR-SITE-NAME`, update `_config.yml` to:
+### Optional Extension Settings
 
-    ```yaml
-    title: YOUR TITLE
-    description: YOUR DESCRIPTION
-    theme: just-the-docs
+| Setting | Default | Description |
+|---------|---------|-------------|
+| `ztpf-debugger.pipe.debuggerPath` | `/usr/bin/gdb` | Absolute remote path to GDB executable on Linux on IBM Z system |
+| `ztpf-debugger.TLS.serverCertificate` | `null` | Path to additional server certificate for TLS |
 
-    url: https://YOUR-USERNAME.github.io/YOUR-SITE-NAME
+### Launch Configuration Properties
 
-    aux_links: # remove if you don't want this link to appear on your pages
-      Template Repository: https://github.com/YOUR-USERNAME/YOUR-SITE-NAME
-    ```
+#### Required Properties
 
-2.  Push your updated `_config.yml` to your site on GitHub.
+- **`hostName`**: IP address or hostname of debug server
+- **`port`**: Port number the debug server listens on
+- **`options`**: Registration configuration object (type-specific)
 
-3.  In your newly created repo on GitHub:
-    - go to the `Settings` tab -> `Pages` -> `Build and deployment`, then select `Source`: `GitHub Actions`.
-    - if there were any failed Actions, go to the `Actions` tab and click on `Re-run jobs`.
+#### Optional Properties
 
-## Building and previewing your site locally
+- **`secure`** (default: `true`): Enable/disable TLS encryption
+- **`additionalSOLibSearchPath`**: Array of remote paths to search for shared objects
+- **`sourceFileMap`**: Object mapping remote source paths to local paths
 
-Assuming [Jekyll] and [Bundler] are installed on your computer:
+---
 
-1.  Change your working directory to the root directory of your site.
+## System Requirements
 
-2.  Run `bundle install`.
+### Local Workstation
 
-3.  Run `bundle exec jekyll serve` to build your site and preview it at `localhost:4000`.
+- **VS Code**: Version 1.105.1 or higher
+- **SSH Client**: Installed and configured with public/private key authentication
+- **Extension Dependency**: Microsoft C/C++ extension (`ms-vscode.cpptools`)
 
-    The built site is stored in the directory `_site`.
+### Remote System
 
-## Publishing your built site on a different platform
+- **Platform**: Linux on IBM Z
+- **GDB**: GNU Debugger installed and accessible
+- **z/TPF Runtime**: Debug server feature installed and running
+- **TPFGDB**: z/TPF-specific GDB extensions installed on Linux on IBM Z system
 
-Just upload all the files in the directory `_site`.
+---
 
-## Customization
+## Known Limitations
 
-You're free to customize sites that you create with this template, however you like!
+1. **Registration Types**: Currently only program-based registration is implemented
+2. **Language Support**: Only C/C++ programs are supported for debugging
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
-
-## Hosting your docs from an existing project repo
-
-You might want to maintain your docs in an existing project repo. Instead of creating a new repo using the [just-the-docs template](https://github.com/just-the-docs/just-the-docs-template), you can copy the template files into your existing repo and configure the template's Github Actions workflow to build from a `docs` directory. You can clone the template to your local machine or download the `.zip` file to access the files.
-
-### Copy the template files
-
-1.  Create a `.github/workflows` directory at your project root if your repo doesn't already have one. Copy the `pages.yml` file into this directory. GitHub Actions searches this directory for workflow files.
-
-2.  Create a `docs` directory at your project root and copy all remaining template files into this directory.
-
-### Modify the GitHub Actions workflow
-
-The GitHub Actions workflow that builds and deploys your site to Github Pages is defined by the `pages.yml` file. You'll need to edit this file to that so that your build and deploy steps look to your `docs` directory, rather than the project root.
-
-1.  Set the default `working-directory` param for the build job.
-
-    ```yaml
-    build:
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: docs
-    ```
-
-2.  Set the `working-directory` param for the Setup Ruby step.
-
-    ```yaml
-    - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.3'
-          bundler-cache: true
-          cache-version: 0
-          working-directory: '${{ github.workspace }}/docs'
-    ```
-
-3.  Set the path param for the Upload artifact step:
-
-    ```yaml
-    - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs/_site/
-    ```
-
-4.  Modify the trigger so that only changes within the `docs` directory start the workflow. Otherwise, every change to your project (even those that don't affect the docs) would trigger a new site build and deploy.
-
-    ```yaml
-    on:
-      push:
-        branches:
-          - "main"
-        paths:
-          - "docs/**"
-    ```
-
-## Licensing and Attribution
-
-This repository is licensed under the [MIT License]. You are generally free to reuse or extend upon this code as you see fit; just include the original copy of the license (which is preserved when you "make a template"). While it's not necessary, we'd love to hear from you if you do use this template, and how we can improve it for future use!
-
-The deployment GitHub Actions workflow is heavily based on GitHub's mixed-party [starter workflows]. A copy of their MIT License is available in [actions/starter-workflows].
-
-----
-
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
-
-[Jekyll]: https://jekyllrb.com
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[Bundler]: https://bundler.io
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
-[`jekyll-default-layout`]: https://github.com/benbalter/jekyll-default-layout
-[`jekyll-seo-tag`]: https://jekyll.github.io/jekyll-seo-tag
-[MIT License]: https://en.wikipedia.org/wiki/MIT_License
-[starter workflows]: https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml
-[actions/starter-workflows]: https://github.com/actions/starter-workflows/blob/main/LICENSE
+---
