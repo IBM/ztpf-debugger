@@ -68,4 +68,7 @@ Explore all the features and capabilities of the extension
 
 ## License
 
-This extension is distributed under the [MIT License](https://github.com/IBM/ztpf-debugger/blob/main/LICENSE).
+This extension is distributed under the terms identified in the [LICENSE file](https://github.com/IBM/ztpf-debugger/blob/main/product/LICENSE).
+
+This documentation site is distributed under the [MIT License](https://github.com/IBM/ztpf-debugger/blob/main/LICENSE).
+
