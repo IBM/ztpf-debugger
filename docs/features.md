@@ -5,10 +5,9 @@ nav_order: 4
 ---
 
 # Debugger Features
-
-Explore the debugging features of the z/TPF VS Code Debugger Extension.
-
 {: .no_toc }
+
+Explore the debugging features of the z/TPF Visual Studio Code Debugger Extension.
 
 ## Table of Contents
 {: .no_toc .text-delta }
@@ -36,14 +35,6 @@ Break only when conditions are met:
 - Right-click breakpoint to add condition
 - Use expressions to control when to break
 - Useful for debugging loops and specific scenarios
-
-### Logpoints
-
-Log messages without stopping execution:
-
-- Add log messages at specific points
-- View output in Debug Console
-- No need to modify source code
 
 ---
 
@@ -107,63 +98,6 @@ View and navigate the call stack:
 
 ---
 
-## Debug Console
+## Extension Logging
 
-### Interactive Debugging
-
-Use the Debug Console to:
-
-- Evaluate expressions during debugging
-- Execute debug commands
-- View program output
-- Inspect values on-the-fly
-- Test expressions before adding to watch
-
-### Console Commands
-
-Common debug console operations:
-
-- Evaluate variables
-- Call functions
-- Modify values
-- View memory
-- Execute system commands
-
----
-
-## Debug Configuration
-
-### Launch Configuration
-
-Configure debugging in `.vscode/launch.json`:
-
-```json
-{
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Debug z/TPF",
-      "type": "ztpf",
-      "request": "launch",
-      "program": "${file}",
-      "stopOnEntry": false
-    }
-  ]
-}
-```
-
-### Configuration Options
-
-- **program**: Path to the program to debug
-- **stopOnEntry**: Pause at program entry
-- **args**: Command line arguments
-- **env**: Environment variables
-
----
-
-## Support
-
-For help and support:
-
-- Report issues on [GitHub Issues](https://github.com/IBM/ztpf-debugger/issues)
-- View documentation for detailed guides
+The extension is integrated into the Visual Studio Code logging feature which allows to change the logging level of a particular extension. Use the `Developer: Set Log Level...` command to change the log level for all of Visual Studio Code or a particular extension. The development team may ask for you to change the logging level to help diagnose problems.

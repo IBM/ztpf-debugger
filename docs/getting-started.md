@@ -3,11 +3,10 @@ title: Getting Started
 layout: default
 nav_order: 3
 ---
-# Getting Started with z/TPF Debugger
-
-This guide will help you get up and running with the z/TPF VS Code Debugger Extension.
-
+# Getting Started with IBM z/TPF Debugger
 {: .no_toc }
+
+This guide will help you get up and running with the IBM z/TPF Debugger Visual Studio Code Extension.
 
 ## Table of Contents
 {: .no_toc .text-delta }
@@ -21,19 +20,36 @@ This guide will help you get up and running with the z/TPF VS Code Debugger Exte
 
 ### Step 1: Install the Extension
 
-Install the extension from the VS Code Marketplace. See the [Installation Guide](installation.md) for detailed instructions.
+Install the extension from the Visual Studio Code Marketplace. See the [Installation Guide](installation.md) for detailed instructions.
 
-### Step 2: Configure Debug Connection
+### Step 2: Configure Extensions
 
-1. Open your z/TPF project in VS Code
+Configure the required settings for the extension.
+
+| Setting | Description |
+| --- | --- |
+| `ztpf-debugger.pipe.program` | Local path to an SSH executable |
+| `ztpf-debugger.pipe.user` | Linux on IBM Z User ID |
+| `ztpf-debugger.pipe.host` | Linux on IBM Z Hostname or IP address |
+| `ztpf-debugger.pipe.debuggerPath` | Remote path to the GDB executable |
+| `ztpf-debugger.tpfgdb.pythonPath` | Remote path to the tpfgdb.py script |
+| `ztpf-debugger.tpfgdb.path` | Remote path to the tpfgdb binary executable |
+
+The IBM z/TPF Debugger extension currently only supports private/public key authentication for SSH. Ensure that you are able to connect to the Linux on IBM Z build environment over SSH.
+
+### Step 3: Configure Debug Connection
+
+1. Open your z/TPF project in Visual Studio Code
 2. Create a debug configuration (`.vscode/launch.json`)
-3. Configure your z/TPF system connection details
+3. Configure your z/TPF system connection details and launch conditions
 
-### Step 3: Start Debugging
+### Step 4: Start Debugging
 
 1. Open a z/TPF source file
 2. Set breakpoints by clicking in the gutter
-3. Press `F5` to start debugging
+3. Press `F5` to start the current debugger registration profile
+4. Start a task on the z/TPF system that will trigger the registration profile
+5. The debugger will connect to your z/TPF program
 
 ---
 
@@ -49,7 +65,7 @@ Press `F5` or use the Debug view to start a debugging session. The debugger will
 
 ### 3. Control Execution
 
-Use the debug toolbar to control execution:
+Use the debug toolbar or keyboard shortcuts to control execution:
 - **Continue** (`F5`): Resume execution
 - **Step Over** (`F10`): Execute current line
 - **Step Into** (`F11`): Step into function calls
@@ -71,26 +87,6 @@ The Variables view shows:
 
 Add expressions to the Watch view to monitor specific values during debugging.
 
-### Debug Console
-
-Use the Debug Console to:
-- Evaluate expressions
-- Execute debug commands
-- View output and logs
-
----
-
-## Debug Commands
-
-Access these commands via the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
-
-| Command | Description |
-|---------|-------------|
-| `z/TPF Debug: Start Debugging` | Start a debug session |
-| `z/TPF Debug: Stop Debugging` | Stop the current debug session |
-| `z/TPF Debug: Restart` | Restart the debug session |
-| `z/TPF Debug: Toggle Breakpoint` | Add/remove breakpoint at current line |
-
 ---
 
 ## Keyboard Shortcuts
@@ -111,7 +107,6 @@ Default debugging shortcuts:
 ## Debugging Tips
 
 - **Conditional Breakpoints**: Right-click a breakpoint to add conditions
-- **Logpoints**: Add log messages without stopping execution
 - **Call Stack**: Use the Call Stack view to navigate execution context
 - **Breakpoint Management**: Use the Breakpoints view to enable/disable breakpoints
 
@@ -120,4 +115,3 @@ Default debugging shortcuts:
 ## Next Steps
 
 - Explore [Features](features.md) for more debugging capabilities
-- Report issues on [GitHub](https://github.com/IBM/ztpf-debugger/issues)

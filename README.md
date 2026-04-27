@@ -32,7 +32,7 @@ Robust network communication with the remote debug service:
 
 ### 3. Debug Configuration
 
-Flexible configuration system integrated with VS Code's launch.json:
+Flexible configuration system integrated with Visual Studio Code's launch.json:
 
 - **Schema Validation**: Built-in JSON schema validation for debug configurations
 - **Configuration Snippets**: Pre-built templates for common debugging scenarios
@@ -92,7 +92,7 @@ Users must configure these settings for the extension to function:
 
 ### Local Workstation
 
-- **VS Code**: Version 1.105.1 or higher
+- **Visual Studio Code**: Version 1.105.1 or higher
 - **SSH Client**: Installed and configured with public/private key authentication
 - **Extension Dependency**: Microsoft C/C++ extension (`ms-vscode.cpptools`)
 

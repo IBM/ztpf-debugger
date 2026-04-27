@@ -1,5 +1,5 @@
-title: z/TPF Debugger
-description: Documentation for the z/TPF VS Code Debugger Extension - debugging IBM z/TPF applications
+title: IBM z/TPF Debugger
+description: Documentation for the IBM z/TPF Debugger Visual Studio Code Extension
 theme: just-the-docs
 
 url: https://IBM.github.io/ztpf-debugger
@@ -28,6 +28,6 @@ color_scheme: light
 # External links
 aux_links:
   "View on GitHub": "https://github.com/IBM/ztpf-debugger"
-  "VS Code Marketplace": "https://marketplace.visualstudio.com/items?itemName=IBM.ztpf-debugger"
+  "Visual Studio Code Marketplace": "https://marketplace.visualstudio.com/items?itemName=IBM.ztpf-debugger"
 
 aux_links_new_tab: true
