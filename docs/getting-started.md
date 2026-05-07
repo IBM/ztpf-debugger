@@ -20,7 +20,7 @@ This guide will help you get up and running with the IBM z/TPF Debugger Visual S
 
 ### Step 1: Install the Extension
 
-Install the extension from the Visual Studio Code Marketplace. See the [Installation Guide](installation.md) for detailed instructions.
+Install the extension from the Visual Studio Code Marketplace. See the [Installation Guide](installation.html) for detailed instructions.
 
 ### Step 2: Configure Extensions
 
@@ -114,4 +114,4 @@ Default debugging shortcuts:
 
 ## Next Steps
 
-- Explore [Features](features.md) for more debugging capabilities
+- Explore [Features](features.html) for more debugging capabilities

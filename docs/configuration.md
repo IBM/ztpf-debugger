@@ -175,5 +175,5 @@ Define multiple debug configurations:
 
 ## Next Steps
 
-- Review [Getting Started](getting-started.md) for debugging basics
-- Explore [Features](features.md) for debugging capabilities
+- Review [Getting Started](getting-started.html) for debugging basics
+- Explore [Features](features.html) for debugging capabilities

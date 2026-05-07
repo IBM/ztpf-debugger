@@ -83,5 +83,5 @@ To remove the extension:
 
 ## Next Steps
 
-- [Getting Started Guide](getting-started.md) - Learn debugging basics
-- [Features Overview](features.md) - Explore debugging capabilities
+- [Getting Started Guide](getting-started.html) - Learn debugging basics
+- [Features Overview](features.html) - Explore debugging capabilities
