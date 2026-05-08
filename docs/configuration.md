@@ -34,6 +34,8 @@ Create a `.vscode/launch.json` file in your project:
       "hostName": "example.org",
       "port": 8124,
       "secure": true,
+      "verifyHost": false,
+      "remoteCAPath": "/path/to/remote/certificate",
       "sourceFileMap": {
         "/path/to/remote/build/folder": {
           "editorPath": "/path/to/local/workspace/",
@@ -61,15 +63,17 @@ Create a `.vscode/launch.json` file in your project:
 | `type` | string | `"ztpf"` | Debugger type (must be "ztpf") |
 | `request` | string | `"launch"` | Request type (must be launch) |
 | `hostName` | string | - | Hostname or IP address of the z/TPF system |
-| `port` | number | - | Port number for the z/TPF debugger |
+| `port` | number | - | Port number for the z/TPF debug server |
 | `secure` | boolean | `true` | Whether to use secure (TLS) connection |
+| `verifyHost` | boolean | `true` | Whether to verify the host name of the debug server when starting GDB on the Linux on IBM Z system |
+| `remoteCAPath` | string | - | The remote path to a certificate file to use when starting GDB on the Linux on IBM Z system |
 | `sourceFileMap` | object | - | Mapping of remote source file paths to local file paths |
 | `additionalSOLibSearchPath` | array | - | Additional paths to search for shared libraries on the Linux on IBM Z system |
 | `options` | object | - | Additional options for the debugger |
 
 #### sourceFileMap
 
-The paths provided with be substituted in order when trying to resolve the source file locations provided by the debug information contained in the shared object. If the z/TPF application is build in one location and the output is moved to a different location, you should specify the location where the source was built from to match the information contained in the shared object.
+The paths provided will be substituted in order when trying to resolve the source file locations provided by the debug information contained in the shared object. If the z/TPF application is built in one location and the output is moved to a different location, you should specify the location where the source was built from to match the information contained in the shared object.
 
 If multiple paths are provided, the extended format as shown above may be required to allow for breakpoints to resolve correctly. Otherwise, a shorter `"/path/to/remote/source":/path/to/local/source"` format may be sufficient.
 
@@ -108,7 +112,7 @@ Minimal setup for debugging:
 
 This sends a request to the z/TPF debug server on `example.org` at port `8214` to register the program `QZZ1`.
 
-### Advanced Configuration
+### Advanced Configuration without TLS
 
 Configuration with additional options:
 
@@ -139,6 +143,40 @@ Configuration with additional options:
 ```
 
 This sends a request to the z/TPF debug server on `example.org` at port `8214` to register the program `QZZ1`. When the GDB debugger process starts on the Linux on IBM Z system, it will use any shared objects found in the `additionalSOLibSearchPath` directory for symbol resolution. The `sourceFileMap` is used by the Microsoft C/C++ extension to map the source code on the Linux on IBM Z system to the files on the workstation, for example, the paths to the Git clones on the workstation.
+
+### Advanced Configuration with TLS
+
+Secure configuration with additional options:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug z/TPF (Advanced)",
+      "type": "ztpf",
+      "request": "launch",
+      "hostname": "example.org",
+      "port": 8214,
+      "secure": true,
+      "verifyHost": false,
+      "remoteCAPath": "/remote/path/to/ca.pem",
+      "sourceFileMap": {
+        "/path/to/remote/source" : "/path/to/local/source"
+      },
+      "additionalSOLibSearchPath": [
+        "/home/user/out/lib"
+      ],
+      "options": {
+        "type": "program",
+        "program": "QZZ1",
+      }
+    }
+  ]
+}
+```
+
+This sends a request to the z/TPF debug server on `example.org` at port `8214` to register the program `QZZ1` using TLS encryption. When the GDB debugger process starts on the Linux on IBM Z system, it will use any shared objects found in the `additionalSOLibSearchPath` directory for symbol resolution. The `sourceFileMap` is used by the Microsoft C/C++ extension to map the source code on the Linux on IBM Z system to the files on the workstation, for example, the paths to the Git clones on the workstation. The `remoteCAPath` is used to specify the path to the root certificate authority (CA) certificate used to verify the identity of the z/TPF server as part of the TLS handshake. Because the `verifyHost` option is set to `false`, the hostname of the z/TPF debug server does not need to match the hostname specified in the certificate in the case of a common certificate for a set of virtual z/TPF systems.
 
 
 ### Multiple Configurations
