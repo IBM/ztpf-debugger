@@ -29,7 +29,7 @@ Before installing the extension, ensure you have:
 
 ## Installation Methods
 
-### Method 1: Install from the configured marketplace (Visual Studio Code / OpenVSX)
+### Method 1: Install from the configured marketplace (Visual Studio Code)
 
 1. Open Visual Studio Code
 2. Click on the **Extensions** icon in the Activity Bar (or press `Ctrl+Shift+X` / `Cmd+Shift+X`)
@@ -39,7 +39,7 @@ Before installing the extension, ensure you have:
 
 ### Method 2: Install from VSIX File
 
-If you have a `.vsix` file either from the [OpenVSX Registry](https://open-vsx.org/) or the z/TPF download page (https://www.ibm.com/support/pages/node/618267):
+If you have a `.vsix` file from the z/TPF download page (https://www.ibm.com/support/pages/node/618267):
 
 1. Open Visual Studio Code
 2. Go to **Extensions** view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
@@ -63,7 +63,7 @@ After installation, verify the extension is active:
 
 ## Updating the Extension
 
-The extension will automatically check for updates from the configured marketplace (Visual Studio Code or Open VSX). 
+The extension will automatically check for updates from the configured marketplace (Visual Studio Code). 
 
 Otherwise, you can manually update the extension by downloading a newer version of the `.vsix` file and installing using the instructions above.
 
